@@ -1,5 +1,6 @@
 import pygame
 from settings import *
+from objects.characters.Player import Player
 
 
 class Main:
@@ -8,6 +9,7 @@ class Main:
         self.screen = pygame.display.set_mode([WINDOW_WIDTH, WINDOW_HEIGHT])
         self.clock = pygame.time.Clock()
         self.running = False
+
     def run(self):
         self.running = True
         while self.running:
@@ -16,6 +18,21 @@ class Main:
                 if event.type == pygame.QUIT:
                     self.running = False
                     pygame.quit()
+
+            # later drawing elements and creation should be wrapped in a function
+            player = Player(WINDOW_WIDTH / 2 - PLAYER_WIDTH / 2,
+                            WINDOW_HEIGHT - PLAYER_HEIGHT,
+                            PLAYER_WEIGHT,
+                            PLAYER_HEIGHT,
+                            PLAYER_WEIGHT,
+                            PLAYER_MAX_SPEED)
+
+            self.screen.fill(BACKGROUND)
+           
+            player_hitbox = pygame.Surface((player.get_width(), player.get_height()), pygame.SRCALPHA)
+            player_hitbox.fill((0, 0, 255, 25))
+            pygame.draw.rect(player_hitbox, PLAYER_HITBOX_COLOR, (0, 0, player.get_width(), player.get_height()), 4)
+            self.screen.blit(player_hitbox, (player.get_positionx(), player.get_positiony()))
 
             pygame.display.update()
 
