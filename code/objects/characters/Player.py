@@ -1,4 +1,5 @@
 from objects.BaseObject import BaseObject
+from key_binds import *
 
 
 class Player(BaseObject):
@@ -8,6 +9,9 @@ class Player(BaseObject):
         self.height = height
         self.weight = weight
         self.max_speed = max_speed
+        self.act_speed = 0
+        self.acceleration = 50
+        self.retardation = 250
 
     def get_width(self):
         return self.width
@@ -39,3 +43,34 @@ class Player(BaseObject):
     def set_dimensions(self, width, height):
         self.width = width
         self.height = height
+
+
+# function which supports horizontal movement of player
+
+    def move_horizontal(self, keys, dt):
+        # check if there is A key pressed
+        if keys[MOVE_LEFT]:
+            # check if player has max speed
+            if abs(self.act_speed) < self.max_speed:
+                self.act_speed -= self.acceleration * dt
+            else:
+                self.act_speed = -self.max_speed
+        # check if player move in other direction
+        else:
+            if self.act_speed < 0:
+                self.act_speed += self.retardation * dt
+
+        # check if there is D key pressed
+        if keys[MOVE_RIGHT]:
+            # check if player has max speed
+            if abs(self.act_speed) < self.max_speed:
+                self.act_speed += self.acceleration * dt
+            else:
+                self.act_speed = self.max_speed
+        # check if player move in other direction
+        else:
+            if self.act_speed > 0:
+                self.act_speed -= self.retardation * dt
+
+        # update player horizontal position
+        self.positionx += self.act_speed * dt

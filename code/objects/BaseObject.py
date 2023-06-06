@@ -1,4 +1,6 @@
 # Represents common features of all objects in game
+
+
 class BaseObject:
     def __init__(self, x, y):
         # center of the object
