@@ -51,7 +51,7 @@ class Player(BaseObject):
         # check if there is A key pressed
         if keys[MOVE_LEFT]:
             # check if player has max speed
-            if abs(self.act_speed) < self.max_speed:
+            if self.act_speed > -self.max_speed:
                 self.act_speed -= self.acceleration * dt
             else:
                 self.act_speed = -self.max_speed
@@ -63,7 +63,7 @@ class Player(BaseObject):
         # check if there is D key pressed
         if keys[MOVE_RIGHT]:
             # check if player has max speed
-            if abs(self.act_speed) < self.max_speed:
+            if self.act_speed < self.max_speed:
                 self.act_speed += self.acceleration * dt
             else:
                 self.act_speed = self.max_speed

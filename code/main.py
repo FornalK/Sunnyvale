@@ -54,14 +54,14 @@ class Main:
                 (player.get_width(), player.get_height()), pygame.SRCALPHA)
             player_hitbox_surf.fill((0, 0, 255, 25))
             player_hitbox = pygame.draw.rect(player_hitbox_surf, PLAYER_HITBOX_COLOR,
-                             (0, 0, player.get_width(), player.get_height()), 4)
+                                             (0, 0, player.get_width(), player.get_height()), 4)
             self.screen.blit(
                 player_hitbox_surf, (player.get_positionx(), player.get_positiony()))
 
             drawed_walls = []
             for wall in walls:
                 drawed_wall = pygame.draw.rect(self.screen, WALL_TEXTURE_COLOR,
-                                (wall.get_positionx(), wall.get_positiony(), wall.get_width(), wall.get_height()))
+                                               (wall.get_positionx(), wall.get_positiony(), wall.get_width(), wall.get_height()))
                 drawed_walls.append(drawed_wall)
 
             # detecting collision
@@ -73,7 +73,6 @@ class Main:
                 print("walls id: " + str(collide))
             """
             pygame.display.update()
-
 
 
 if __name__ == '__main__':
