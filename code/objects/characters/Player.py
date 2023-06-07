@@ -1,17 +1,18 @@
 from objects.BaseObject import BaseObject
 from key_binds import *
+from settings import *
 
 
 class Player(BaseObject):
-    def __init__(self, x, y, width, height, weight, max_speed):
+    def __init__(self, x, y):
         super().__init__(x, y)
-        self.width = width
-        self.height = height
-        self.weight = weight
-        self.max_speed = max_speed
+        self.width = PLAYER_WIDTH
+        self.height = PLAYER_HEIGHT
+        self.weight = PLAYER_WEIGHT
+        self.max_speed = PLAYER_MAX_SPEED
         self.act_speed = 0
-        self.acceleration = 50
-        self.retardation = 250
+        self.acceleration = PLAYER_ACCELERATION
+        self.retardation = PLAYER_RETARDATION
 
     def get_width(self):
         return self.width
@@ -43,6 +44,9 @@ class Player(BaseObject):
     def set_dimensions(self, width, height):
         self.width = width
         self.height = height
+
+    def set_act_speed(self, act_speed):
+        self.act_speed = act_speed
 
 
 # function which supports horizontal movement of player

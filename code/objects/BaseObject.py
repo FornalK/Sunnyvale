@@ -3,6 +3,7 @@
 
 class BaseObject:
     def __init__(self, x, y):
+        # center of the object
         self.positionx = x
         self.positiony = y
 
