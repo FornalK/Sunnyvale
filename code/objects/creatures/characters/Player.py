@@ -6,7 +6,8 @@ from settings import *
 class Player(DynamicCreature):
     def __init__(self, x, y):
         super().__init__(x, y, PLAYER_WIDTH, PLAYER_HEIGHT, TYPE_PLAYER, PLAYER_WEIGHT,
-                         PLAYER_MAX_SPEED, PLAYER_ACCELERATION, PLAYER_RETARDATION)
+                         PLAYER_MAX_SPEED, PLAYER_ACCELERATION, PLAYER_RETARDATION,
+                         PLAYER_JUMP_MAX_SPEED, PLAYER_NUM_JUMP)
         self.in_air = False
         self.after_jump = False
 
@@ -21,6 +22,11 @@ class Player(DynamicCreature):
 
     def change_after_jump(self):
         self.after_jump = not self.after_jump
+
+    # function which reset player ability to jump after player hits a floor
+    def reset_jump(self):
+        self.jump_act_speed = 0
+        self.jump_num = PLAYER_NUM_JUMP
 
     # function which supports horizontal movement of player
     def move_horizontal(self, keys, dt):
@@ -49,19 +55,13 @@ class Player(DynamicCreature):
         # update player horizontal position
         self.positionx += self.act_speed * dt
 
-    # TODO: Do usunięcia po implementacji skoku
-    # a method that trivially implements gravity
-    def fall(self, keys):
-        if not keys[JUMP]:
-            self.positiony += 0.5
+    # function which support player jumping and his movement in vertical axis
+    def move_up(self, keys, dt):
+        # check if there is SPACE key pressed and player can still left jumps
+        if keys[JUMP] and self.jump_num > 0 and self.jump_act_speed < 10:
+            self.jump_num -= 1
+            self.jump_act_speed += self.jump_start_speed
 
-    # a method that trivially implements lifting
-    def fly(self):
-        self.positiony -= 0.25
-        self.in_air = True
-        # self.after_jump = True
-
-    def move_up(self, keys):
-        # check if there is SPACE key pressed
-        if keys[JUMP]:
-            self.fly()
+        # calculate speed and position of player in vertical axis
+        self.jump_act_speed -= GRAVITY * dt
+        self.positiony -= self.jump_act_speed * dt

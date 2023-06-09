@@ -23,6 +23,7 @@ def collision_with_wall(player, wall):
 
     if min_dist_index == 0:
         player.change_in_air()
+        player.reset_jump()
     elif min_dist_index == 1:
         player.set_positiony(player.get_positiony() + 50) #imitacja odbicia sie glowa od podloza
     elif min_dist_index == 2:
@@ -33,3 +34,4 @@ def collision_with_wall(player, wall):
         player.set_move_direction(-1)
     else:
         raise
+

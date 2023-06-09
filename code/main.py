@@ -14,7 +14,8 @@ class Main:
 
     def run(self):
         # later drawing elements and creation should be wrapped in a function
-        player = Player(WINDOW_WIDTH / 2, WINDOW_HEIGHT - (PLAYER_HEIGHT / 2) - 20)
+        player = Player(WINDOW_WIDTH / 2, WINDOW_HEIGHT -
+                        (PLAYER_HEIGHT / 2) - 20)
 
         right_wall = Wall(WINDOW_WIDTH - 20,
                           0,
@@ -32,9 +33,9 @@ class Main:
                       20)
 
         platform1 = Wall(200,
-                      WINDOW_HEIGHT - 100,
-                      300,
-                      20)
+                         WINDOW_HEIGHT - 100,
+                         300,
+                         20)
 
         platform2 = Wall(800,
                          WINDOW_HEIGHT - 350,
@@ -55,11 +56,7 @@ class Main:
             self.screen.fill(BACKGROUND)
 
             player.move_horizontal(keys, dt)
-            player.move_up(keys)
-
-            # At the beginning of the loop, we assume that the player is in the air
-            # Later in the collision check, if a ground collision is detected, this field will be set to false
-            player.in_air = True
+            player.move_up(keys, dt)
 
             player_hitbox = pygame.draw.rect(self.screen, PLAYER_HITBOX_COLOR,
                                              (player.get_positionx() - player.get_width() / 2,
@@ -92,10 +89,6 @@ class Main:
             colliding_walls = player_hitbox.collidelistall(drawed_walls)
             for wall_index in colliding_walls:
                 collision_with_wall(player, walls[wall_index])
-
-            # If player is in air and not after jump, let gravity act on him
-            if player.get_in_air() and not player.get_after_jump():
-                player.fall(keys)
 
             pygame.display.update()
 
