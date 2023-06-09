@@ -19,32 +19,27 @@ class Main:
         right_wall = Wall(WINDOW_WIDTH - 20,
                           0,
                           20,
-                          WINDOW_HEIGHT - 20,
-                          False)
+                          WINDOW_HEIGHT - 20)
 
         left_wall = Wall(0,
                          0,
                          20,
-                         WINDOW_HEIGHT - 20,
-                         False)
+                         WINDOW_HEIGHT - 20)
 
         ground = Wall(0,
                       WINDOW_HEIGHT - 20,
                       WINDOW_WIDTH,
-                      20,
-                      True)
+                      20)
 
         platform1 = Wall(200,
                       WINDOW_HEIGHT - 100,
                       300,
-                      20,
-                      True)
+                      20)
 
         platform2 = Wall(800,
                          WINDOW_HEIGHT - 350,
                          400,
-                         20,
-                         True)
+                         20)
 
         walls = [right_wall, left_wall, ground, platform1, platform2]
 

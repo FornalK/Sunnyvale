@@ -2,12 +2,10 @@ from objects.BaseObject import BaseObject
 
 
 class Wall(BaseObject):
-    def __init__(self, x, y, width, height, rotation: bool):
+    def __init__(self, x, y, width, height):
         super().__init__(x, y)
         self.width = width
         self.height = height
-        # rotation - True == horizontal, False == Vertical
-        self.rotation = rotation
 
     def get_width(self):
         return self.width
@@ -32,7 +30,3 @@ class Wall(BaseObject):
         temp = self.width
         self.width = self.height
         self.height = temp
-        self.rotation = not self.rotation
-
-    def get_rotation(self):
-        return self.rotation

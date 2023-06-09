@@ -9,6 +9,7 @@ class DynamicCreature(BaseCreature):
         self.act_speed = 0
         self.acceleration = acceleration
         self.retardation = retardation
+        self.move_direction = 0  # 1 = right, -1 = left
 
     def get_weight(self):
         return self.weight
@@ -24,3 +25,9 @@ class DynamicCreature(BaseCreature):
 
     def set_act_speed(self, act_speed):
         self.act_speed = act_speed
+
+    def get_move_direction(self):
+        return self.move_direction
+
+    def set_move_direction(self, move_direction):
+        self.move_direction = move_direction

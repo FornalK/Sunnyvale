@@ -24,27 +24,25 @@ class Player(DynamicCreature):
 
     # function which supports horizontal movement of player
     def move_horizontal(self, keys, dt):
+        flag = True
         # check if there is A key pressed
         if keys[MOVE_LEFT]:
-            # check if player has max speed
-            if self.act_speed > -self.max_speed:
-                self.act_speed -= self.acceleration * dt
-            else:
-                self.act_speed = -self.max_speed
-        # check if player move in other direction
+            self.move_direction = -1
+            flag = False
+        if keys[MOVE_RIGHT]:
+            self.move_direction = 1
+            flag = False
+
+        # check if player has max speed
+        if abs(self.act_speed) < self.max_speed:
+            self.act_speed += self.move_direction * self.acceleration * dt
         else:
+            self.act_speed = self.move_direction * self.max_speed
+
+        # check if player move in other direction
+        if flag:
             if self.act_speed < 0:
                 self.act_speed += self.retardation * dt
-
-        # check if there is D key pressed
-        if keys[MOVE_RIGHT]:
-            # check if player has max speed
-            if self.act_speed < self.max_speed:
-                self.act_speed += self.acceleration * dt
-            else:
-                self.act_speed = self.max_speed
-        # check if player move in other direction
-        else:
             if self.act_speed > 0:
                 self.act_speed -= self.retardation * dt
 
