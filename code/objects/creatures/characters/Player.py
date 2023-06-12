@@ -61,7 +61,9 @@ class Player(DynamicCreature):
         if keys[JUMP] and self.jump_num > 0 and self.jump_act_speed < 10:
             self.jump_num -= 1
             self.jump_act_speed += self.jump_start_speed
+            self.in_air = True
 
         # calculate speed and position of player in vertical axis
-        self.jump_act_speed -= GRAVITY * dt
-        self.positiony -= self.jump_act_speed * dt
+        if self.in_air:
+            self.jump_act_speed -= GRAVITY * dt
+            self.positiony -= self.jump_act_speed * dt

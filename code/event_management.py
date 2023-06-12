@@ -2,6 +2,8 @@ from objects.creatures.characters.Player import Player
 from objects.world_elements.Wall import Wall
 
 # Handle players behavior when collide with wall
+
+
 def collision_with_wall(player, wall):
     # find x and y for all sites of players and walls hitbox
     player_up = player.get_positiony() - player.get_height() / 2
@@ -22,10 +24,11 @@ def collision_with_wall(player, wall):
     min_dist_index = distances.index(min(distances))
 
     if min_dist_index == 0:
-        player.change_in_air()
+        player.in_air = False
         player.reset_jump()
     elif min_dist_index == 1:
-        player.set_positiony(player.get_positiony() + 50) #imitacja odbicia sie glowa od podloza
+        # imitacja odbicia sie glowa od podloza
+        player.set_positiony(player.get_positiony() + 50)
     elif min_dist_index == 2:
         player.set_act_speed(0)
         player.set_move_direction(1)
@@ -34,4 +37,3 @@ def collision_with_wall(player, wall):
         player.set_move_direction(-1)
     else:
         raise
-

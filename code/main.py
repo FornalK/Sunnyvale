@@ -55,15 +55,12 @@ class Main:
 
             self.screen.fill(BACKGROUND)
 
-            player.move_horizontal(keys, dt)
-            player.move_up(keys, dt)
-
             player_hitbox = pygame.draw.rect(self.screen, PLAYER_HITBOX_COLOR,
                                              (player.get_positionx() - player.get_width() / 2,
                                               player.get_positiony() - player.get_height() / 2,
                                               player.get_width(),
                                               player.get_height()),
-                                              4)
+                                             4)
 
             # draw center of the player object
             pygame.draw.circle(self.screen,
@@ -85,10 +82,18 @@ class Main:
                                    (0, 0, 0),
                                    wall.get_position(), 2)
 
+            # set default that player is in air and then check if there is any collision
+            player.in_air = True
+
             # detecting collision between player and walls
             colliding_walls = player_hitbox.collidelistall(drawed_walls)
             for wall_index in colliding_walls:
                 collision_with_wall(player, walls[wall_index])
+
+            print(player.act_speed)
+
+            player.move_horizontal(keys, dt)
+            player.move_up(keys, dt)
 
             pygame.display.update()
 
