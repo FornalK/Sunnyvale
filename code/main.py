@@ -4,6 +4,7 @@ from settings import *
 from objects.creatures.characters.Player import Player
 from objects.world_elements.Wall import Wall
 
+from editor import Editor
 
 class Main:
     def __init__(self):
@@ -12,7 +13,10 @@ class Main:
         self.clock = pygame.time.Clock()
         self.running = False
 
+        self.editor = Editor()
+
     def run(self):
+        """
         # later drawing elements and creation should be wrapped in a function
         player = Player(WINDOW_WIDTH / 2, WINDOW_HEIGHT -
                         (PLAYER_HEIGHT / 2) - 20)
@@ -43,10 +47,12 @@ class Main:
                          20)
 
         walls = [right_wall, left_wall, ground, platform1, platform2]
-
+        """
         self.running = True
         while self.running:
             dt = self.clock.tick() / 1000
+
+            """
             keys = pygame.key.get_pressed()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -90,11 +96,12 @@ class Main:
             for wall_index in colliding_walls:
                 collision_with_wall(player, walls[wall_index])
 
-            print(player.act_speed)
-
             player.move_horizontal(keys, dt)
             player.move_up(keys, dt)
+            
+            """
 
+            self.editor.run(dt)
             pygame.display.update()
 
 
