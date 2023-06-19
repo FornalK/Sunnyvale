@@ -3,6 +3,7 @@ from event_management import *
 from settings import *
 from objects.creatures.characters.Player import Player
 from objects.world_elements.Wall import Wall
+from support import *
 
 from editor import Editor
 
@@ -13,7 +14,9 @@ class Main:
         self.clock = pygame.time.Clock()
         self.running = False
 
-        self.editor = Editor()
+        self.graphics = import_folder_dict('../graphics/editor')
+
+        self.editor = Editor(self.graphics)
 
     def run(self):
         """

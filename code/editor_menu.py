@@ -15,8 +15,6 @@ class EditorMenu:
         for key, value in EDITOR_DATA.items():
             self.menu_surfs[key] = load(value['menu_surf'])
 
-        print(self.menu_surfs)
-
     def create_menu(self):
         # menu area
         size = 180 # menu size
@@ -29,11 +27,11 @@ class EditorMenu:
 
 
     def display(self, index):
-        menu_rect = self.menu_surf.get_rect()
-        self.display_surface.blit(self.menu_surf, self.topleft, menu_rect)
+        self.menu_rect = self.menu_surf.get_rect()
+        self.display_surface.blit(self.menu_surf, self.topleft, self.menu_rect)
         imagerect = self.menu_surfs[index].get_rect()
 
-        position = (menu_rect.width / 2 - imagerect.width / 2, menu_rect.height / 2 - imagerect.height / 2)
+        position = (self.menu_rect.width / 2 - imagerect.width / 2, self.menu_rect.height / 2 - imagerect.height / 2)
 
         self.menu_surf.blit(self.menu_surfs[index], position, imagerect)
 
